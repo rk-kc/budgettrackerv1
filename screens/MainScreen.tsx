@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
+import { Text, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
 
@@ -20,5 +20,3 @@ const MainScreen = () => {
 };
 
 export default MainScreen;
-
-const styles = StyleSheet.create({});

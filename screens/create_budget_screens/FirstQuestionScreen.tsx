@@ -1,10 +1,5 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	TextInput,
-	TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -16,7 +11,8 @@ import { CreateBudgetStackParamList } from '../CreateBudgetScreen';
 const FirstQuestionScreen = () => {
 	const navigation =
 		useNavigation<StackNavigationProp<CreateBudgetStackParamList>>();
-	const [value, onChangeText] = React.useState('Useless Placeholder');
+
+	const [value, onChangeText] = React.useState<string>('');
 
 	return (
 		<View style={tw`items-center m-5`}>
@@ -26,10 +22,25 @@ const FirstQuestionScreen = () => {
 				style={tw`bg-gray-200 w-80 p-2 m-5 rounded-lg`}
 				onChangeText={(text) => onChangeText(text)}
 				value={value}
+				placeholder="Name it something cool..."
 			/>
 			<View style={tw`flex-row`}>
 				<TouchableOpacity
+					onPress={() => navigation.navigate('MainScreen')}
+					style={tw`flex-row mr-10`}
+				>
+					<Icon
+						style={tw`p-1 w-10`}
+						type="antdesign"
+						name="arrowleft"
+						color="black"
+					/>
+					<Text style={tw`text-lg`}>Back</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={tw`flex-row ml-10`}
 					onPress={() => navigation.navigate('SecondQuestionScreen')}
+					disabled={value === ''}
 				>
 					<Icon
 						style={tw`p-1 w-10`}

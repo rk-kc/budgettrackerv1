@@ -36,6 +36,13 @@ const ThirdQuestionScreen = () => {
 		[setOpen, setRange]
 	);
 
+	const onSubmit = () => {
+		{
+			console.log('submitted');
+		}
+		return true;
+	};
+
 	return (
 		<View style={tw`items-center m-5`}>
 			<Text style={tw`text-10`}>3/3</Text>
@@ -69,14 +76,32 @@ const ThirdQuestionScreen = () => {
 			<View style={tw`flex-row`}>
 				<TouchableOpacity
 					onPress={() => navigation.navigate('SecondQuestionScreen')}
+					style={tw`flex-row mr-10`}
 				>
 					<Icon
 						style={tw`p-1 w-10`}
 						type="antdesign"
-						name="arrowright"
+						name="arrowleft"
 						color="black"
 					/>
-					<Text style={tw`text-lg`}>Next</Text>
+					<Text style={tw`text-lg`}>Back</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() =>
+						onSubmit() ? navigation.navigate('SuccessScreen') : null
+					}
+					style={tw`flex-row ml-10`}
+					disabled={
+						range.startDate === undefined || range.endDate === undefined
+					}
+				>
+					<Icon
+						style={tw`p-1 w-10`}
+						type="antdesign"
+						name="check"
+						color="black"
+					/>
+					<Text style={tw`text-lg`}>Submit</Text>
 				</TouchableOpacity>
 			</View>
 		</View>

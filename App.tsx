@@ -8,10 +8,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Import screens here
 import MainScreen from './screens/MainScreen';
 import CreateBudgetScreen from './screens/CreateBudgetScreen';
+import SuccessScreen from './screens/success_screen/SuccessScreen';
 
 export type RootStackParamList = {
 	MainScreen: undefined;
 	CreateBudgetScreen: undefined;
+	SuccessScreen: undefined;
 };
 
 export default function App() {
@@ -30,6 +32,11 @@ export default function App() {
 						<Stack.Screen
 							name="CreateBudgetScreen"
 							component={CreateBudgetScreen}
+							options={{ headerShown: false }}
+						/>
+						<Stack.Screen
+							name="SuccessScreen"
+							component={SuccessScreen}
 							options={{ headerShown: false }}
 						/>
 					</Stack.Navigator>
