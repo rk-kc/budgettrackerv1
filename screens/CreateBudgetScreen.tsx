@@ -8,10 +8,12 @@ import BudgetTrackerLogo from '../components/BudgetTrackerLogo';
 
 import FirstQuestionScreen from './create_budget_screens/FirstQuestionScreen';
 import SecondQuestionScreen from './create_budget_screens/SecondQuestionScreen';
+import ThirdQuestionScreen from './create_budget_screens/ThirdQuestionScreen';
 
 export type CreateBudgetStackParamList = {
 	FirstQuestionScreen: undefined;
 	SecondQuestionScreen: undefined;
+	ThirdQuestionScreen: undefined;
 };
 
 const CreateBudgetScreen = () => {
@@ -38,6 +40,11 @@ const CreateBudgetScreen = () => {
 					<Stack.Screen
 						name="SecondQuestionScreen"
 						component={SecondQuestionScreen}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="ThirdQuestionScreen"
+						component={ThirdQuestionScreen}
 						options={{ headerShown: false }}
 					/>
 				</Stack.Navigator>
