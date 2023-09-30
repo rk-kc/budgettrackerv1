@@ -10,10 +10,13 @@ import MainScreen from './screens/MainScreen';
 import CreateBudgetScreen from './screens/CreateBudgetScreen';
 import SuccessScreen from './screens/success_screen/SuccessScreen';
 
+import HomeScreenBase from './screens/HomeScreenBase';
+
 export type RootStackParamList = {
 	MainScreen: undefined;
 	CreateBudgetScreen: undefined;
 	SuccessScreen: undefined;
+	BudgetHomeScreen: undefined;
 };
 
 export default function App() {
@@ -37,6 +40,11 @@ export default function App() {
 						<Stack.Screen
 							name="SuccessScreen"
 							component={SuccessScreen}
+							options={{ headerShown: false }}
+						/>
+						<Stack.Screen
+							name="HomeScreenBase"
+							component={HomeScreenBase}
 							options={{ headerShown: false }}
 						/>
 					</Stack.Navigator>

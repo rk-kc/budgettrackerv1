@@ -1,12 +1,17 @@
 import { Image, Text, View, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import React from 'react';
 import tw from 'twrnc';
 import kloudcoreIcon from './../../assets/kloudcore-color.png';
+import { CreateBudgetStackParamList } from '../CreateBudgetScreen';
 
 const SuccessScreen = () => {
+	const navigation =
+		useNavigation<StackNavigationProp<CreateBudgetStackParamList>>();
 	const message = useSelector((state: any) => state.success);
 	// Get the budget details as well to display on the success screen
 	const budget = useSelector((state: any) => state.budget);
@@ -50,7 +55,7 @@ const SuccessScreen = () => {
 				<Button
 					// icon="camera"
 					mode="contained"
-					onPress={() => console.log('Pressed')}
+					onPress={() => navigation.navigate('HomeScreenBase')}
 					style={tw`w-70 bg-gray-400`}
 				>
 					Continue to App

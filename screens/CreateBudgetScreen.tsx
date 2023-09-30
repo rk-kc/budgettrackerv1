@@ -16,6 +16,7 @@ export type CreateBudgetStackParamList = {
 	ThirdQuestionScreen: undefined;
 	MainScreen: undefined;
 	SuccessScreen: undefined;
+	HomeScreenBase: undefined;
 };
 
 const CreateBudgetScreen = () => {
