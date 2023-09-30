@@ -1,5 +1,5 @@
 // For redux
-import store from './store';
+import store from './data_layer/store';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

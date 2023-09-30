@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createBudget } from '../../data_layer/budgetSlice';
+import { updateSuccessScreen } from '../../data_layer/successSlice';
+import React, { useState, useEffect } from 'react';
 import tw from 'twrnc';
 
 import { CreateBudgetStackParamList } from '../CreateBudgetScreen';
@@ -17,31 +20,57 @@ type RangeDateProps = {
 const ThirdQuestionScreen = () => {
 	const navigation =
 		useNavigation<StackNavigationProp<CreateBudgetStackParamList>>();
-	const [range, setRange] = React.useState<RangeDateProps>({
+	const [range, setRange] = useState<RangeDateProps>({
 		startDate: new Date(),
 		endDate: new Date(),
 	});
-	const [open, setOpen] = React.useState(false);
+	const [duration, setDuration] = useState(0);
+	const [open, setOpen] = useState(false);
+	const dispatch = useDispatch();
+	const budget = useSelector((state: any) => state.budget);
 
 	const onDismiss = React.useCallback(() => {
 		setOpen(false);
 	}, [setOpen]);
 
-	const onConfirm = React.useCallback(
-		({ startDate, endDate }) => {
-			setOpen(false);
-			setRange({ startDate, endDate });
-			console.log(range);
-		},
-		[setOpen, setRange]
-	);
+	const onConfirm = ({ startDate, endDate }) => {
+		setOpen(false);
+		setRange({ startDate, endDate });
+		setDuration(getDurationBetweenDates(startDate, endDate));
+	};
+
+	const getDurationBetweenDates = (date1: Date, date2: Date) => {
+		const diffInTime = date2.getTime() - date1.getTime();
+		const diffInDays = diffInTime / (1000 * 3600 * 24);
+		return Math.ceil(diffInDays);
+	};
 
 	const onSubmit = () => {
-		{
-			console.log('submitted');
-		}
+		dispatch(
+			createBudget({
+				budgetName: budget.budgetName,
+				budgetAmount: budget.budgetAmount,
+				budgetDuration: {
+					startDate: range.startDate.toLocaleDateString(),
+					endDate: range.endDate.toLocaleDateString(),
+					duration: duration,
+				},
+			})
+		);
+		dispatch(
+			updateSuccessScreen({
+				budgetName: budget.budgetName,
+				budgetHeading: 'New Budget Created!',
+				budgetDescription:
+					'You can always change the settings in the View Budgets page.',
+			})
+		);
 		return true;
 	};
+
+	useEffect(() => {
+		console.log(budget);
+	});
 
 	return (
 		<View style={tw`items-center m-5`}>
@@ -109,5 +138,3 @@ const ThirdQuestionScreen = () => {
 };
 
 export default ThirdQuestionScreen;
-
-const styles = StyleSheet.create({});

@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { createBudget } from '../../data_layer/budgetSlice';
 import React from 'react';
 import tw from 'twrnc';
 
@@ -12,6 +14,22 @@ const SecondQuestionScreen = () => {
 	const navigation =
 		useNavigation<StackNavigationProp<CreateBudgetStackParamList>>();
 	const [value, onChangeText] = React.useState<string>('');
+	const dispatch = useDispatch();
+	const budget = useSelector((state: any) => state.budget); // existing budget
+
+	const updateBudgetAmount = () => {
+		dispatch(
+			createBudget({
+				budgetName: budget.budgetName,
+				budgetAmount: value,
+				budgetDuration: {
+					startDate: '',
+					endDate: '',
+					duration: 0,
+				},
+			})
+		);
+	};
 
 	return (
 		<View style={tw`items-center m-5`}>
@@ -39,7 +57,10 @@ const SecondQuestionScreen = () => {
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={tw`flex-row ml-10`}
-					onPress={() => navigation.navigate('ThirdQuestionScreen')}
+					onPress={() => {
+						updateBudgetAmount();
+						navigation.navigate('ThirdQuestionScreen');
+					}}
 					disabled={value === ''}
 				>
 					<Icon
@@ -56,5 +77,3 @@ const SecondQuestionScreen = () => {
 };
 
 export default SecondQuestionScreen;
-
-const styles = StyleSheet.create({});

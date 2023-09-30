@@ -1,10 +1,12 @@
 // This is a sample code for the store.ts file
 import { configureStore } from '@reduxjs/toolkit';
-import budgetReducer from './slices/slice';
+import budgetReducer from './budgetSlice';
+import successReducer from './successSlice';
 
 const store = configureStore({
 	reducer: {
-		nav: budgetReducer,
+		budget: budgetReducer,
+		success: successReducer,
 	},
 });
 
