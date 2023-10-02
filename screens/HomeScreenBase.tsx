@@ -6,6 +6,7 @@ import BudgetHomeScreen from './budget_home_screens/BudgetHomeScreen';
 import BudgetTransactionScreen from './budget_home_screens/BudgetTransactionScreen';
 import ViewBudgetsScreen from './budget_home_screens/ViewBudgetsScreen';
 import SettingsScreen from './budget_home_screens/SettingsScreen';
+import NewExpenseScreen from './budget_home_screens/NewExpenseScreen';
 
 const HomeScreenBase = () => {
 	const [index, setIndex] = React.useState(0);
@@ -18,9 +19,15 @@ const HomeScreenBase = () => {
 		},
 		{
 			key: 'transactions',
-			title: 'Transactions',
+			title: 'Recents',
 			focusedIcon: 'history',
 			unfocusedIcon: 'history',
+		},
+		{
+			key: 'newExpense',
+			title: 'Expense',
+			focusedIcon: 'plus',
+			unfocusedIcon: 'plus-circle',
 		},
 		{
 			key: 'budgets',
@@ -39,6 +46,7 @@ const HomeScreenBase = () => {
 	const renderScene = BottomNavigation.SceneMap({
 		home: BudgetHomeScreen,
 		transactions: BudgetTransactionScreen,
+		newExpense: NewExpenseScreen,
 		budgets: ViewBudgetsScreen,
 		settings: SettingsScreen,
 	});

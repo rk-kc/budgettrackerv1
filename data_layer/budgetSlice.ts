@@ -12,6 +12,15 @@ export type BudgetTypeProps = {
 	budgetDuration: BudgetDurationTypeProps;
 };
 
+type ExpenseTypeProps = {
+	expenseName: string;
+	expenseAmount: string;
+	expenseDate: string;
+	purpose: string;
+	paidWithWhat: string;
+	description: string;
+};
+
 export const budgetSlice = createSlice({
 	name: 'budget',
 	initialState: {
@@ -22,6 +31,7 @@ export const budgetSlice = createSlice({
 			endDate: '',
 			duration: 0,
 		},
+		expenses: [],
 	},
 	reducers: {
 		createBudget: (state, action) => {
@@ -29,9 +39,12 @@ export const budgetSlice = createSlice({
 			state.budgetAmount = action.payload.budgetAmount;
 			state.budgetDuration = action.payload.budgetDuration;
 		},
+		createExpense: (state, action) => {
+			state.expenses.push(action.payload);
+		},
 	},
 });
 
 // export actions
-export const { createBudget } = budgetSlice.actions;
+export const { createBudget, createExpense } = budgetSlice.actions;
 export default budgetSlice.reducer;
