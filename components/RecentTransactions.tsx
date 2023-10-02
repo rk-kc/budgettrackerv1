@@ -32,24 +32,29 @@ const RecentTransactions = () => {
 							<View style={[tw`bg-gray-200`, { height: 0.5 }]} />
 						)}
 						renderItem={({ item }) => (
-							<SafeAreaView>
-								<View style={tw`flex-row items-center p-5`}>
-									<Icon
-										style={tw`p-3 bg-gray-300 rounded-full mr-4`}
-										type="antdesign"
-										name="creditcard"
-										color="white"
-									/>
-									<View style={tw`text-overflow-ellipsis`}>
-										<Text style={tw`flex flex-wrap flex-dir-row font-semibold`}>
-											{`At ${item.expenseDate}, you paid ${formatter.format(
-												parseFloat(item.expenseAmount)
-											)} for ${item.expenseName} with ${item.paidWithWhat}.`}
-										</Text>
-										<Text style={tw`text-gray-500`}>{item.description}</Text>
-									</View>
+							<View style={tw`flex-row items-center w-80 p-4`}>
+								<Icon
+									style={tw`p-3 bg-gray-300 rounded-full mr-4`}
+									type="antdesign"
+									name="creditcard"
+									color="white"
+								/>
+								<View
+									style={{
+										flexDirection: 'row',
+										backgroundColor: 'white',
+										padding: 5,
+										margin: 2,
+									}}
+								>
+									<Text style={{ flex: 1, flexWrap: 'wrap' }}>
+										{`On ${item.expenseDate}, you paid ${formatter.format(
+											parseFloat(item.expenseAmount)
+										)} for ${item.expenseName} with ${item.paidWithWhat}.`}
+									</Text>
+									<Text style={tw`text-gray-500`}>{item.description}</Text>
 								</View>
-							</SafeAreaView>
+							</View>
 						)}
 					/>
 				</View>

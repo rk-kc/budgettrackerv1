@@ -1,10 +1,17 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import BudgetNameHeading from '../../components/BudgetNameHeading';
+import RecentTransactions from '../../components/RecentTransactions';
 import React from 'react';
 
 const BudgetTransactionScreen = () => {
 	return (
 		<SafeAreaView>
-			<Text>BudgetTransactionScreen</Text>
+			<View>
+				<BudgetNameHeading />
+			</View>
+			<View>
+				<RecentTransactions />
+			</View>
 		</SafeAreaView>
 	);
 };

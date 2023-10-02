@@ -42,9 +42,7 @@ const BudgetHomeScreen = () => {
 					Close
 				</Button>
 			</View>
-			<View style={tw`flex`}>
-				<RecentTransactions />
-			</View>
+			<RecentTransactions />
 		</SafeAreaView>
 	);
 };

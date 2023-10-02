@@ -15,28 +15,20 @@ const RemainingBudget = () => {
 	const [customMessage, setCustomMessage] = useState('');
 
 	const getRemainingBudgetAmount = (expenses: any) => {
-		// expenses is an array of objects
-		// each object has a property called amount
-		// we want to sum up all the amounts
-		// and return the remaining budget amount
-		// budgetAmount - sum of all the amounts
-		// return budgetAmount - sum of all the amounts
-		// expenses.reduce((accumulator, expense) => accumulator + expense.amount, 0)
-		if (expenses) {
-			setRemainingBudget(
-				expenses.reduce(
-					(accumulator: any, expense: any) => accumulator + expense.amount,
-					0
-				)
-			);
+		// Get the total amount of expenses
+		let totalExpense = 0;
+		if (expenses.length > 0) {
+			expenses.forEach((expense: any) => {
+				totalExpense += parseFloat(expense.expenseAmount);
+			});
 		}
-		setRemainingBudget(0);
+		setRemainingBudget(parseFloat(budgetAmount) - totalExpense);
 	};
 
 	const customizeMessageDependingOnTheRemainingBudgetAmount = (
 		remainingAmount: any
 	) => {
-		if (budgetAmount * 0.2 <= remainingAmount) {
+		if (remainingAmount <= budgetAmount * 0.2) {
 			setCustomMessage("Oh no! You're almost out of budget!");
 		} else {
 			setCustomMessage("You're doing great! Keep spending!");
@@ -51,10 +43,11 @@ const RemainingBudget = () => {
 	return (
 		<View>
 			<View style={tw`items-center`}>
+				<Text style={tw`mt-2`}>Remaining Budget</Text>
 				<Text
 					style={tw`text-10 font-bold p-10 m-10 bg-gray-200 border-radius-100`}
 				>
-					{formatter.format(budgetAmount)}
+					{formatter.format(remainingBudget)}
 				</Text>
 			</View>
 			<View style={tw`items-center`}>
