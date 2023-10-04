@@ -31,6 +31,7 @@ export const budgetSlice = createSlice({
 			endDate: '',
 			duration: 0,
 		},
+		status: 'active', // 'active' | 'inactive' | 'completed'
 		expenses: [],
 	},
 	reducers: {
@@ -38,13 +39,18 @@ export const budgetSlice = createSlice({
 			state.budgetName = action.payload.budgetName;
 			state.budgetAmount = action.payload.budgetAmount;
 			state.budgetDuration = action.payload.budgetDuration;
+			state.status = action.payload.status;
 		},
 		createExpense: (state, action) => {
 			state.expenses.push(action.payload);
+		},
+		updateBudgetStatus: (state, action) => {
+			state.status = action.payload;
 		},
 	},
 });
 
 // export actions
-export const { createBudget, createExpense } = budgetSlice.actions;
+export const { createBudget, createExpense, updateBudgetStatus } =
+	budgetSlice.actions;
 export default budgetSlice.reducer;

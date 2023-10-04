@@ -5,6 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBudget } from '../../data_layer/budgetSlice';
 import { updateSuccessScreen } from '../../data_layer/successSlice';
+import storage from '../../data_layer/storage';
 import React, { useState, useEffect } from 'react';
 import tw from 'twrnc';
 
@@ -55,6 +56,7 @@ const ThirdQuestionScreen = () => {
 					endDate: range.endDate.toLocaleDateString(),
 					duration: duration,
 				},
+				status: 'active',
 			})
 		);
 		dispatch(
@@ -65,12 +67,23 @@ const ThirdQuestionScreen = () => {
 					'You can always change the settings in the View Budgets page.',
 			})
 		);
+		storage.save({
+			key: 'budgets',
+			data: [
+				{
+					budgetName: budget.budgetName,
+					budgetAmount: budget.budgetAmount,
+					budgetDuration: {
+						startDate: range.startDate.toLocaleDateString(),
+						endDate: range.endDate.toLocaleDateString(),
+						duration: duration,
+					},
+					status: 'active',
+				},
+			],
+		});
 		return true;
 	};
-
-	useEffect(() => {
-		console.log(budget);
-	});
 
 	return (
 		<View style={tw`items-center m-5`}>

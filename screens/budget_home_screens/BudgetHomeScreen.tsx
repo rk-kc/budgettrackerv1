@@ -15,7 +15,6 @@ import RemainingBudget from '../../components/RemainingBudget';
 import React from 'react';
 import tw from 'twrnc';
 
-import NewExpenseScreen from './NewExpenseScreen';
 import RecentTransactions from '../../components/RecentTransactions';
 
 const BudgetHomeScreen = () => {
@@ -26,20 +25,12 @@ const BudgetHomeScreen = () => {
 			<RemainingBudget />
 			<View style={tw`flex-row justify-center`}>
 				<Button
-					icon="plus"
-					mode="contained"
-					onPress={() => navigation.navigate('NewExpenseScreen')}
-					style={tw`mr-4 font-bold w-40`}
-				>
-					Expense
-				</Button>
-				<Button
 					icon="close"
 					mode="contained"
-					onPress={() => console.log('Pressed')}
+					onPress={() => navigation.navigate('CloseBudgetScreen')}
 					style={tw`ml-4 w-40`}
 				>
-					Close
+					Close Budget
 				</Button>
 			</View>
 			<RecentTransactions />

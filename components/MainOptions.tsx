@@ -20,7 +20,7 @@ const data: MainOptionsDataProps[] = [
 	{
 		id: 'MainOption2',
 		title: 'Choose from existing',
-		screen: 'ExistingBudgets',
+		screen: 'ExistingBudgetsScreen',
 	},
 ];
 

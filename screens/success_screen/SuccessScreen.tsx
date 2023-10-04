@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
 import tw from 'twrnc';
 import kloudcoreIcon from './../../assets/kloudcore-color.png';
 import { CreateBudgetStackParamList } from '../CreateBudgetScreen';
@@ -55,7 +55,11 @@ const SuccessScreen = () => {
 				<Button
 					// icon="camera"
 					mode="contained"
-					onPress={() => navigation.navigate('HomeScreenBase')}
+					onPress={() =>
+						budget.status === 'completed'
+							? navigation.navigate('MainScreen')
+							: navigation.navigate('HomeScreenBase')
+					}
 					style={tw`w-70 bg-gray-400`}
 				>
 					Continue to App

@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
+import storage from '../data_layer/storage';
 import React, { useEffect, useState } from 'react';
 import tw from 'twrnc';
 
 const RemainingBudget = () => {
-	const budgetAmount = useSelector((state: any) => state.budget.budgetAmount);
+	const budget = useSelector((state: any) => state.budget);
 	const expenses = useSelector((state: any) => state.budget.expenses);
 	const formatter = new Intl.NumberFormat('ja-JP', {
 		style: 'currency',
@@ -22,13 +23,13 @@ const RemainingBudget = () => {
 				totalExpense += parseFloat(expense.expenseAmount);
 			});
 		}
-		setRemainingBudget(parseFloat(budgetAmount) - totalExpense);
+		setRemainingBudget(parseFloat(budget.budgetAmount) - totalExpense);
 	};
 
 	const customizeMessageDependingOnTheRemainingBudgetAmount = (
 		remainingAmount: any
 	) => {
-		if (remainingAmount <= budgetAmount * 0.2) {
+		if (remainingAmount <= budget.budgetAmount * 0.2) {
 			setCustomMessage("Oh no! You're almost out of budget!");
 		} else {
 			setCustomMessage("You're doing great! Keep spending!");
